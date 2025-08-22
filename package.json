@@ -11,10 +11,10 @@
 		"name": "Cline Bot Inc."
 	},
 	"license": "Apache-2.0",
-	"publisher": "saoudrizwan",
+	"publisher": "evinelias",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cline/cline"
+		"url": "https://github.com/evinelias/CLINE-QWEN-CODE.git"
 	},
 	"homepage": "https://cline.bot",
 	"categories": [
