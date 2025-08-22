@@ -1,0 +1,48 @@
+{
+  "name": "@evinelias/cline-qwen-code",
+  "version": "3.26.3",
+  "description": "Cline AI Assistant with Qwen Code API Integration - VS Code Extension Package",
+  "main": "CLINE-QWEN-CODE.vsix",
+  "keywords": [
+    "vscode",
+    "extension", 
+    "ai",
+    "cline",
+    "qwen",
+    "coding-assistant",
+    "claude-dev",
+    "artificial-intelligence",
+    "code-generation",
+    "developer-tools"
+  ],
+  "author": {
+    "name": "evinelias",
+    "url": "https://github.com/evinelias"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evinelias/CLINE-QWEN-CODE.git"
+  },
+  "homepage": "https://github.com/evinelias/CLINE-QWEN-CODE",
+  "bugs": {
+    "url": "https://github.com/evinelias/CLINE-QWEN-CODE/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "CLINE-QWEN-CODE.vsix"
+  ],
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "AI",
+    "Chat", 
+    "Programming Languages",
+    "Education",
+    "Snippets",
+    "Testing"
+  ]
+}

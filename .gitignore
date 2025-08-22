@@ -1,10 +1,10 @@
 out
-dist
+# dist - Allow dist folder to be tracked for VSIX files
 dist-standalone
 node_modules
 tmp
 .vscode-test/
-*.vsix
+# *.vsix - Allow VSIX files to be tracked for GitHub visibility
 
 .DS_Store
 .idea
