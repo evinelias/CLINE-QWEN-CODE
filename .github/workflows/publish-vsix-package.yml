@@ -1,0 +1,158 @@
+name: Publish VSIX to GitHub Packages
+
+on:
+  push:
+    tags:
+      - 'vsix-v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'VSIX Package Version'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  publish-vsix-only:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@evinelias'
+
+      - name: Create VSIX-only package directory
+        run: |
+          mkdir -p vsix-package
+          cp dist/CLINE-QWEN-CODE.vsix vsix-package/
+
+      - name: Get version info
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${GITHUB_REF#refs/tags/vsix-v}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create package.json for VSIX package
+        run: |
+          cat > vsix-package/package.json << 'EOF'
+          {
+            "name": "@evinelias/cline-qwen-code-vsix",
+            "version": "${{ steps.version.outputs.version }}",
+            "description": "CLINE-QWEN-CODE VS Code Extension Package - Direct VSIX Download",
+            "main": "CLINE-QWEN-CODE.vsix",
+            "files": [
+              "CLINE-QWEN-CODE.vsix"
+            ],
+            "keywords": [
+              "vscode",
+              "extension",
+              "vsix",
+              "ai",
+              "cline",
+              "qwen",
+              "coding-assistant",
+              "artificial-intelligence",
+              "code-generation",
+              "developer-tools"
+            ],
+            "author": {
+              "name": "evinelias",
+              "url": "https://github.com/evinelias"
+            },
+            "license": "Apache-2.0",
+            "repository": {
+              "type": "git",
+              "url": "https://github.com/evinelias/CLINE-QWEN-CODE.git"
+            },
+            "homepage": "https://github.com/evinelias/CLINE-QWEN-CODE",
+            "bugs": {
+              "url": "https://github.com/evinelias/CLINE-QWEN-CODE/issues"
+            },
+            "publishConfig": {
+              "registry": "https://npm.pkg.github.com"
+            },
+            "engines": {
+              "vscode": "^1.84.0"
+            },
+            "categories": [
+              "AI",
+              "Chat",
+              "Programming Languages",
+              "Education",
+              "Snippets",
+              "Testing"
+            ],
+            "extensionPack": [],
+            "extensionDependencies": [],
+            "contributes": {
+              "description": "Enhanced Cline AI assistant with Qwen Code API integration for advanced coding assistance"
+            }
+          }
+          EOF
+
+      - name: Create README for package
+        run: |
+          cat > vsix-package/README.md << 'EOF'
+          # CLINE-QWEN-CODE VS Code Extension
+          
+          🚀 **Enhanced AI Coding Assistant with Qwen Code API Integration**
+          
+          ## Quick Installation
+          
+          1. Download the VSIX file from this package
+          2. Install via VS Code: Extensions → Install from VSIX
+          3. Configure Qwen API in Cline settings
+          4. Start coding with enhanced AI assistance!
+          
+          ## Features
+          
+          - **Qwen Code Integration**: Specialized AI models for coding tasks
+          - **Multi-Provider Support**: Switch between Qwen, Claude, GPT, Gemini
+          - **Enhanced Code Generation**: 40+ programming languages supported
+          - **Terminal Integration**: Execute commands with AI monitoring
+          - **Browser Automation**: Web testing and debugging capabilities
+          - **MCP Support**: Extensible via Model Context Protocol
+          
+          ## Package Contents
+          
+          - `CLINE-QWEN-CODE.vsix` - Ready-to-install VS Code extension
+          
+          ## Installation
+          
+          ```bash
+          # Download the VSIX file
+          npm pack @evinelias/cline-qwen-code-vsix
+          
+          # Or install directly from VS Code
+          code --install-extension CLINE-QWEN-CODE.vsix
+          ```
+          
+          ## Repository
+          
+          Source code: https://github.com/evinelias/CLINE-QWEN-CODE
+          EOF
+
+      - name: Publish VSIX package to GitHub Packages
+        run: |
+          cd vsix-package
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create package summary
+        run: |
+          echo "✅ Published VSIX package to GitHub Packages"
+          echo "📦 Package: @evinelias/cline-qwen-code-vsix@${{ steps.version.outputs.version }}"
+          echo "🔗 View at: https://github.com/evinelias/CLINE-QWEN-CODE/packages"
+          echo "📥 Install: npm install @evinelias/cline-qwen-code-vsix"
