@@ -4,8 +4,9 @@
 Successfully integrated Qwen Code API into Cline by studying Kilo Code's implementation and adapting it for Cline's architecture.
 
 ## 📦 How to Download and Install
-✅ Successfully created VSIX package: dist/CLINE-QWEN-CODE.vsix (8.45 MB) 
-    - Download CLINE-QWEN-CODE.vsix and install it on VSCode from clicking on extensions --> top right 3 dots --> install from VSIX
+✅ Successfully created VSIX package: dist/CLINE-QWEN-CODE.vsix (8.45 MB)
+
+- Download CLINE-QWEN-CODE.vsix and install it on VSCode from clicking on extensions --> top right 3 dots --> install from VSIX
 
 ## ✅ Completed Tasks
 
