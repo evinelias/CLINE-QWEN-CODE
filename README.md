@@ -57,7 +57,7 @@ Successfully integrated Qwen Code API into Cline by studying Kilo Code's impleme
 - Both models support 1M context window and 65K max tokens
 
 ## 📦 Build Output
-- ✅ Successfully created VSIX package: `dist/cline-with-qwen.vsix` (8.45 MB)
+- ✅ Successfully created VSIX package: `dist/CLINE-QWEN-CODE.vsix.vsix` (8.45 MB)
 - ✅ Extension compiles without errors related to Qwen Code integration
 - ✅ All new TypeScript interfaces and types properly defined
 - ✅ Protocol buffers correctly generated and integrated
